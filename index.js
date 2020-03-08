@@ -15,13 +15,25 @@ app.get('/getRate', function (req, res) {
     var mailType = req.query.mailType;
     var price = 0;
     if(mailType === 'lettersStamped') {
-    	price = .40 + (weight * .15);
+    	if (weight > 4) {
+    		price = 1.00;
+    	} else {
+    		price = .40 + (weight * .15);
+    	}
     	price = price.toFixed(2);
     } else if(mailType === 'lettersMetered') {
-    	price = .35 + (weight * .15);
+    	if (weight > 4) {
+    		price = .95;
+    	} else {
+    		price = .35 + (weight * .15);
+    	}
     	price = price.toFixed(2);
     } else if(mailType === 'largeEnvelopesFlats') {
-    	price = .80 + (weight * .20);
+    	if (weight > 13) {
+    		price = 3.40;
+    	} else {
+    		price = .80 + (weight * .20);
+    	}
     	price = price.toFixed(2);
     } else if(mailType === 'firstClassPackageServiceRetail') {
     	if(weight < 5) {
